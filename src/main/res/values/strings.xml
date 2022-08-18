@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ポケモンを見れるアプリ</string>
     <string name="display">表示</string>
+    <string name="select_pokemon">ポケモンを選んでください</string>
 </resources>

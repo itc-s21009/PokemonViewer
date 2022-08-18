@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ポケモンを見れるアプリ</string>
+    <string name="display">表示</string>
 </resources>

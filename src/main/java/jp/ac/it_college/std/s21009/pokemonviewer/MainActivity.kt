@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
             binding.tvType.text = getString(R.string.type,
                 typeNameList.joinToString("\n") { "・${it}" })
+            binding.tvWeight.text = getString(R.string.weight, info.weight)
         }
     }
 

@@ -5,5 +5,4 @@
     <string name="type">タイプ\n%1$s</string>
     <string name="weight">重さ\n%1$dkg</string>
     <string name="genus">種族\n%1$s</string>
-    <string name="description">概要\n%1$s</string>
 </resources>

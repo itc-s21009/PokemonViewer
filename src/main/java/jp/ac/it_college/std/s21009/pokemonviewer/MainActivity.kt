@@ -67,15 +67,15 @@ class MainActivity : AppCompatActivity() {
                 val typeId = getNumberAtEndOfURL(it.type.url)
                 getTypeInfo(typeId).names.filter { n -> n.language.name == "ja-Hrkt" }[0].name
             }
-            binding.tvType.text = getString(R.string.type,
-                typeNameList.joinToString("\n") { "・${it}" })
-            binding.tvWeight.text = getString(R.string.weight, info.weight)
             val speciesId = getNumberAtEndOfURL(info.species.url)
             val species = getSpeciesInfo(speciesId)
             val japaneseText = species.flavorTexts.filter { text -> text.language.name == "ja" }[0].flavorText
-            binding.tvFlavorText.text = japaneseText
             val genus = species.genera.filter { g -> g.language.name == "ja-Hrkt"}[0].genus
+            binding.tvType.text = getString(R.string.type,
+                typeNameList.joinToString("\n") { "・${it}" })
+            binding.tvWeight.text = getString(R.string.weight, info.weight)
             binding.tvGenus.text = getString(R.string.genus, genus)
+            binding.tvFlavorText.text = japaneseText
         }
     }
 

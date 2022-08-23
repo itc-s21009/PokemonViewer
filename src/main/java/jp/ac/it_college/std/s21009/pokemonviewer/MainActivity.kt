@@ -38,8 +38,14 @@ class MainActivity : AppCompatActivity() {
     private val service: PokemonService = retrofit.create(PokemonService::class.java)
     private val pokemonList = mapOf(
         "フシギダネ" to 1,
+        "フシギソウ" to 2,
+        "フシギバナ" to 3,
         "ヒトカゲ" to 4,
+        "リザード" to 5,
+        "リザードン" to 6,
         "ゼニガメ" to 7,
+        "カメール" to 8,
+        "カメックス" to 9,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,6 +7,7 @@ import com.squareup.moshi.JsonClass
 data class PokemonInfo(
     val sprites: Sprites,
     val types: List<Type>,
+    val species: NamedAPIResource,
     val weight: Int
 )
 
@@ -39,7 +40,18 @@ data class Name(
 @JsonClass(generateAdapter = true)
 data class Type(
     val slot: Int,
-    @Json(name = "type") val resource: NamedAPIResource
+    val type: NamedAPIResource
+)
+
+@JsonClass(generateAdapter = true)
+data class SpeciesInfo(
+    @Json(name = "flavor_text_entries") val flavorTexts: List<FlavorText>
+)
+
+@JsonClass(generateAdapter = true)
+data class FlavorText(
+    @Json(name = "flavor_text") val flavorText: String,
+    val language: NamedAPIResource
 )
 
 @JsonClass(generateAdapter = true)

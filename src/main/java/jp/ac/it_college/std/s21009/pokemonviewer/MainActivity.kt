@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import jp.ac.it_college.std.s21009.pokemonviewer.databinding.ActivityMainBinding
 import jp.ac.it_college.std.s21009.pokemonviewer.service.PokemonInfo
 import jp.ac.it_college.std.s21009.pokemonviewer.service.PokemonService
+import jp.ac.it_college.std.s21009.pokemonviewer.service.SpeciesInfo
 import jp.ac.it_college.std.s21009.pokemonviewer.service.TypeInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,13 +64,16 @@ class MainActivity : AppCompatActivity() {
             val info = getPokemonInfo(id)
             Picasso.get().load(info.sprites.other.officialArtwork.frontDefault).into(binding.imgPokemon)
             val typeNameList = info.types.map {
-                val split = it.resource.url.split("/")
-                val typeId = split[split.size - 2].toInt()
+                val typeId = getNumberAtEndOfURL(it.type.url)
                 getTypeInfo(typeId).names.filter { n -> n.language.name == "ja-Hrkt" }[0].name
             }
             binding.tvType.text = getString(R.string.type,
                 typeNameList.joinToString("\n") { "・${it}" })
             binding.tvWeight.text = getString(R.string.weight, info.weight)
+            val speciesId = getNumberAtEndOfURL(info.species.url)
+            val species = getSpeciesInfo(speciesId)
+            val japaneseText = species.flavorTexts.filter { text -> text.language.name == "ja" }[0].flavorText
+            binding.tvFlavorText.text = japaneseText
         }
     }
 
@@ -87,6 +91,19 @@ class MainActivity : AppCompatActivity() {
         return withContext(Dispatchers.IO) {
             service.fetchType(id).execute().body() ?: throw IllegalStateException("ポケモンが取れませんでした")
         }
+    }
+
+    @Suppress("BlockingMethodInNonBlockingContext")
+    @WorkerThread
+    private suspend fun getSpeciesInfo(id: Int): SpeciesInfo {
+        return withContext(Dispatchers.IO) {
+            service.fetchSpecies(id).execute().body() ?: throw IllegalStateException("ポケモンが取れませんでした")
+        }
+    }
+
+    private fun getNumberAtEndOfURL(url: String): Int {
+        val split= url.split("/")
+        return split[split.size - 2].toInt()
     }
 
 }

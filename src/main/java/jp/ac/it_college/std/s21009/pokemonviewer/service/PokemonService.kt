@@ -9,4 +9,9 @@ interface PokemonService {
     fun fetchPokemon(
         @Path("id") id: Int
     ): Call<PokemonInfo>
+
+    @GET("api/v2/type/{id}/")
+    fun fetchType(
+        @Path("id") id: Int
+    ): Call<TypeInfo>
 }

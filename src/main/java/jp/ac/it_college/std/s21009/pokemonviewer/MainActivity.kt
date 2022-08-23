@@ -74,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             val species = getSpeciesInfo(speciesId)
             val japaneseText = species.flavorTexts.filter { text -> text.language.name == "ja" }[0].flavorText
             binding.tvFlavorText.text = japaneseText
+            val genus = species.genera.filter { g -> g.language.name == "ja-Hrkt"}[0].genus
+            binding.tvGenus.text = getString(R.string.genus, genus)
         }
     }
 

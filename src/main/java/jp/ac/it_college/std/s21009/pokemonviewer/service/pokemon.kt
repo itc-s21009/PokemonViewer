@@ -45,12 +45,19 @@ data class Type(
 
 @JsonClass(generateAdapter = true)
 data class SpeciesInfo(
-    @Json(name = "flavor_text_entries") val flavorTexts: List<FlavorText>
+    @Json(name = "flavor_text_entries") val flavorTexts: List<FlavorText>,
+    val genera: List<Genus>
 )
 
 @JsonClass(generateAdapter = true)
 data class FlavorText(
     @Json(name = "flavor_text") val flavorText: String,
+    val language: NamedAPIResource
+)
+
+@JsonClass(generateAdapter = true)
+data class Genus(
+    val genus: String,
     val language: NamedAPIResource
 )
 

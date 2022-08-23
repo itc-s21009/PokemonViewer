@@ -28,8 +28,8 @@
 
     <ImageView
         android:id="@+id/imgPokemon"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/display"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgPokemon"
         tools:text="タイプ\n・くさ\n・どく" />
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/tvType"
         app:layout_constraintTop_toBottomOf="@+id/imgPokemon"
         tools:text="重さ\n69kg" />
@@ -75,20 +75,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/tvWeight"
-        app:layout_constraintTop_toBottomOf="@+id/imgPokemon"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/tvType"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeight"
         tools:text="種族\nたねポケモン" />
 
     <TextView
         android:id="@+id/tvFlavorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvType"
+        app:layout_constraintTop_toBottomOf="@+id/tvGenus"
         tools:text="生まれたときから　背中に\n不思議な　タネが　植えてあって\n体と　ともに　育つという。" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

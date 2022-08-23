@@ -46,6 +46,15 @@ class MainActivity : AppCompatActivity() {
         "ゼニガメ" to 7,
         "カメール" to 8,
         "カメックス" to 9,
+        "ピカチュウ" to 25,
+        "イーブイ" to 133,
+        "ルカリオ" to 448,
+        "カイリュー" to 149,
+        "ゲッコウガ" to 658,
+        "ニンフィア" to 700,
+        "ミュウ" to 151,
+        "アブソル" to 359,
+        "レックウザ" to 384,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

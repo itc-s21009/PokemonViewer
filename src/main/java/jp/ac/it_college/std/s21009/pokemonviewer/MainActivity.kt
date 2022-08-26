@@ -2,10 +2,8 @@ package jp.ac.it_college.std.s21009.pokemonviewer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.SimpleAdapter
-import android.widget.Toolbar
+import android.view.View
+import android.widget.*
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.lang.Exception
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
@@ -67,54 +66,68 @@ class MainActivity : AppCompatActivity() {
             android.R.layout.simple_list_item_1,
             pokemonList.keys.toTypedArray()
         )
+        binding.spPokemon.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                binding.etId.setText("")
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
         binding.btDisplay.setOnClickListener {
-            val id = pokemonList[binding.spPokemon.selectedItem]
-            showPokemonInfo(id?:throw IllegalArgumentException("存在しないポケモンが選ばれました"))
+            val text = binding.etId.text.toString()
+            val id = if (text.isEmpty()) pokemonList[binding.spPokemon.selectedItem] else text.toInt()
+            showPokemonInfo(id ?: throw IllegalArgumentException("存在しないポケモンが選ばれました"))
         }
     }
 
     @UiThread
     private fun showPokemonInfo(id: Int) {
         lifecycleScope.launch {
-            val info = getPokemonInfo(id)
-            Picasso.get().load(info.sprites.other.officialArtwork.frontDefault).into(binding.imgPokemon)
-            val typeNameList = info.types.map {
-                val typeId = getNumberAtEndOfURL(it.type.url)
-                getTypeInfo(typeId).names.filter { n -> n.language.name == "ja-Hrkt" }[0].name
+            try {
+                val info = getPokemonInfo(id)!!
+                Picasso.get().load(info.sprites.other.officialArtwork.frontDefault).into(binding.imgPokemon)
+                val typeNameList = info.types.map {
+                    val typeId = getNumberAtEndOfURL(it.type.url)
+                    getTypeInfo(typeId)!!.names.filter { n -> n.language.name == "ja-Hrkt" }[0].name
+                }
+                val speciesId = getNumberAtEndOfURL(info.species.url)
+                val species = getSpeciesInfo(speciesId)!!
+                val japaneseText = species.flavorTexts.filter { text -> text.language.name == "ja" }[0].flavorText
+                val genus = species.genera.filter { g -> g.language.name == "ja-Hrkt"}[0].genus
+                binding.tvType.text = getString(R.string.type,
+                    typeNameList.joinToString("\n") { "・${it}" })
+                binding.tvWeight.text = getString(R.string.weight, info.weight)
+                binding.tvGenus.text = getString(R.string.genus, genus)
+                binding.tvFlavorText.text = japaneseText
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@MainActivity, R.string.not_found , Toast.LENGTH_LONG).show()
             }
-            val speciesId = getNumberAtEndOfURL(info.species.url)
-            val species = getSpeciesInfo(speciesId)
-            val japaneseText = species.flavorTexts.filter { text -> text.language.name == "ja" }[0].flavorText
-            val genus = species.genera.filter { g -> g.language.name == "ja-Hrkt"}[0].genus
-            binding.tvType.text = getString(R.string.type,
-                typeNameList.joinToString("\n") { "・${it}" })
-            binding.tvWeight.text = getString(R.string.weight, info.weight)
-            binding.tvGenus.text = getString(R.string.genus, genus)
-            binding.tvFlavorText.text = japaneseText
         }
     }
 
     @Suppress("BlockingMethodInNonBlockingContext")
     @WorkerThread
-    private suspend fun getPokemonInfo(id: Int): PokemonInfo {
+    private suspend fun getPokemonInfo(id: Int): PokemonInfo? {
         return withContext(Dispatchers.IO) {
-            service.fetchPokemon(id).execute().body() ?: throw IllegalStateException("ポケモンが取れませんでした")
+            service.fetchPokemon(id).execute().body()
         }
     }
 
     @Suppress("BlockingMethodInNonBlockingContext")
     @WorkerThread
-    private suspend fun getTypeInfo(id: Int): TypeInfo {
+    private suspend fun getTypeInfo(id: Int): TypeInfo? {
         return withContext(Dispatchers.IO) {
-            service.fetchType(id).execute().body() ?: throw IllegalStateException("ポケモンが取れませんでした")
+            service.fetchType(id).execute().body()
         }
     }
 
     @Suppress("BlockingMethodInNonBlockingContext")
     @WorkerThread
-    private suspend fun getSpeciesInfo(id: Int): SpeciesInfo {
+    private suspend fun getSpeciesInfo(id: Int): SpeciesInfo? {
         return withContext(Dispatchers.IO) {
-            service.fetchSpecies(id).execute().body() ?: throw IllegalStateException("ポケモンが取れませんでした")
+            service.fetchSpecies(id).execute().body()
         }
     }
 

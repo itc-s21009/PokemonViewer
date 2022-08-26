@@ -19,22 +19,35 @@
     <Button
         android:id="@+id/btDisplay"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/display"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/etId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/input_id"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="@+id/spPokemon"
+        app:layout_constraintStart_toStartOf="@+id/tvOrInputId"
+        app:layout_constraintTop_toBottomOf="@+id/tvOrInputId" />
+
     <ImageView
         android:id="@+id/imgPokemon"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
         android:contentDescription="@string/display"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/etId" />
 
     <TextView
         android:id="@+id/tvSelectPokemon"
@@ -48,24 +61,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvOrInputId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/or_input_id"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/spPokemon"
+        app:layout_constraintStart_toStartOf="@+id/spPokemon"
+        app:layout_constraintTop_toBottomOf="@+id/spPokemon" />
+
+    <TextView
+        android:id="@+id/tvIdDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/id_description"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/etId"
+        app:layout_constraintTop_toBottomOf="@+id/btDisplay" />
+
+    <TextView
         android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgPokemon"
-        tools:text="タイプ\n・くさ\n・どく" />
+        tools:text="タイプ\n・くさ\n・フェアリー" />
 
     <TextView
         android:id="@+id/tvWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/tvType"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgPokemon"
         app:layout_constraintTop_toBottomOf="@+id/imgPokemon"
         tools:text="重さ\n69kg" />
 
@@ -73,12 +105,11 @@
         android:id="@+id/tvGenus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/tvType"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/tvWeight"
-        tools:text="種族\nたねポケモン" />
+        tools:text="種族\nむすびつきポケモン" />
 
     <TextView
         android:id="@+id/tvFlavorText"
@@ -87,10 +118,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGenus"
         tools:text="生まれたときから　背中に\n不思議な　タネが　植えてあって\n体と　ともに　育つという。" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

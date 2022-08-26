@@ -2,7 +2,11 @@
     <string name="app_name">ポケモンを見れるアプリ</string>
     <string name="display">表示</string>
     <string name="select_pokemon">ポケモンを選んでください</string>
+    <string name="or_input_id">もしくは図鑑IDを入力</string>
+    <string name="input_id">図鑑IDを入力</string>
+    <string name="id_description">IDは\n1〜905,10001〜10249\nの範囲で選んでください</string>
     <string name="type">タイプ\n%1$s</string>
     <string name="weight">重さ\n%1$dkg</string>
     <string name="genus">種族\n%1$s</string>
+    <string name="not_found">ポケモンが見つかりませんでした</string>
 </resources>

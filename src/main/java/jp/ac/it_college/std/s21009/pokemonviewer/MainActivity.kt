@@ -95,11 +95,13 @@ class MainActivity : AppCompatActivity() {
                 val species = getSpeciesInfo(speciesId)!!
                 val japaneseText = species.flavorTexts.filter { text -> text.language.name == "ja" }[0].flavorText
                 val genus = species.genera.filter { g -> g.language.name == "ja-Hrkt"}[0].genus
+                val name = species.names.filter { n -> n.language.name == "ja-Hrkt"}[0].name
                 binding.tvType.text = getString(R.string.type,
                     typeNameList.joinToString("\n") { "・${it}" })
                 binding.tvWeight.text = getString(R.string.weight, info.weight)
                 binding.tvGenus.text = getString(R.string.genus, genus)
                 binding.tvFlavorText.text = japaneseText
+                binding.tvPokemonName.text = getString(R.string.pokemon_name, name)
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(this@MainActivity, R.string.not_found , Toast.LENGTH_LONG).show()

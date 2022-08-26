@@ -9,4 +9,5 @@
     <string name="weight">重さ\n%1$dkg</string>
     <string name="genus">種族\n%1$s</string>
     <string name="not_found">ポケモンが見つかりませんでした</string>
+    <string name="pokemon_name">名前\n%1$s</string>
 </resources>
